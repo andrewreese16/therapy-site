@@ -1,0 +1,65 @@
+/* General body and container styles */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.page-title {
+  text-align: center;
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+/* Form styling */
+.cancel-form .form-group {
+  margin-bottom: 15px;
+}
+
+.cancel-form .form-group label {
+  font-weight: bold;
+  color: #333;
+}
+
+.cancel-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.cancel-form .form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button styling */
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}

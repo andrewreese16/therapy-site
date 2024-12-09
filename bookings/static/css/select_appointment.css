@@ -1,0 +1,74 @@
+/* General body and container styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.page-title {
+  text-align: center;
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+/* Styling the list of appointments */
+.appointment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.appointment-item {
+  background-color: #f9f9f9;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.appointment-item input[type="radio"] {
+  margin-right: 12px;
+}
+
+.appointment-details {
+  font-size: 1rem;
+  color: #333;
+}
+
+.appointment-item:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button Styling */
+.cancel-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #0056b3;
+}

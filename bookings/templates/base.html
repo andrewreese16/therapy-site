@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome - My Booking Site{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/listening ear.jpeg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">The Listening Ear</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookings/book/">Create Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookings/cancel/">Cancel Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about/">About Me</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        {% block content %}
+        <!-- Default content for the landing page -->
+        <h1>Welcome to The Listening Ear</h1>
+        <p>We offer the following services:</p>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Active Listening & Emotional Support:</strong> Offering a safe, non-judgmental space to listen to your concerns, helping you navigate through stressful situations, and providing empathy and understanding.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Personal Growth & Goal Setting:</strong> Helping you identify personal goals, break them down into achievable steps, and provide guidance on how to stay motivated.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Stress Management & Coping Strategies:</strong> Practical tools and strategies to manage stress, anxiety, and life’s challenges.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Relationship Guidance:</strong> Offering advice and a safe space to discuss relationship challenges, whether with family, friends, or romantic partners.
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Life Transitions Support:</strong> Offering support during major life changes such as moving, career shifts, or changes in personal relationships.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Mindset and Confidence Building:</strong> Helping you cultivate a positive mindset and boost self-confidence.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Decision-Making and Problem Solving:</strong> Providing guidance to help you weigh options and make decisions in personal and professional matters.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>General Life Advice & Guidance:</strong> Non-clinical advice and suggestions on navigating difficult conversations, handling everyday stressors, or exploring life’s purpose.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <a href="/bookings/book/" class="btn btn-primary mt-3">Book an Appointment</a>
+        {% endblock %}
+        
+        {% if messages %}
+        <div class="container mt-4">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} fade show" role="alert" id="message-{{ forloop.counter }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        <script>
+            // Automatically hide messages after 5 seconds
+            setTimeout(() => {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    alert.classList.remove('show');
+                    alert.classList.add('fade');
+                });
+            }, 5000); // 5000ms = 5 seconds
+        </script>
+        {% endif %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

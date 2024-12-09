@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/select_appointment.css' %}">
+{% endblock head %}
+    
+{% block title %}Select Appointment to Cancel{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="page-title">Select the Appointment to Cancel</h1>
+        <form method="POST" action="/bookings/cancel/">
+            {% csrf_token %}
+            <ul class="appointment-list">
+                {% for appointment in appointments %}
+                <li class="appointment-item">
+                    <input type="radio" name="appointment_id" value="{{ appointment.id }}" required>
+                    <span class="appointment-details">
+                        {{ appointment.appointment_date }} - {{ appointment.customer_name }} ({{ appointment.customer_phone }})
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="cancel-button">Cancel Selected Appointment</button>
+        </form>
+    </div>
+{% endblock %}
