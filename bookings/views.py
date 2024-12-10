@@ -43,7 +43,7 @@ def create_checkout_session(request):
 def checkout(request):
     if request.method == "POST":
         try:
-            # Create a Stripe Checkout Session
+            # Stripe Checkout Session
             checkout_session = stripe.checkout.Session.create(
                 payment_method_types=["card"],
                 line_items=[
