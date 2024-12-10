@@ -25,6 +25,7 @@ def book_appointment(request):
         date = request.POST.get("date")  # Date selected
         time = request.POST.get("time")  # Time selected
         email = request.POST.get("email")
+        notes = request.POST.get("notes")
 
         # Combine date and time into a single datetime object
         try:
@@ -48,6 +49,7 @@ def book_appointment(request):
                         customer_phone=phone,
                         customer_email=email,
                         appointment_date=appointment_date,
+                        notes=notes,
                     )
                     messages.success(request, "Appointment booked successfully!")
                     return redirect("/")  # Redirect to the landing page after booking
