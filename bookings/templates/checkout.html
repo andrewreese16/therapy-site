@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}  
+{% endblock head %}
+<script src="https://js.stripe.com/v3/"></script>
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+  
+  <div class="checkout-container">
+    <h1>Complete Your Payment</h1>
+    <div class="appointment-summary">
+        <h3>Appointment Details</h3>
+        <ul>
+            <li><strong>Service:</strong> Listening Session</li>
+            <li><strong>Price:</strong> $10.00</li>
+        </ul>
+    </div>
+
+    <div class="payment-info">
+        <p>To confirm your appointment, please click the button below to pay.</p>
+
+        <form action="{% url 'checkout' %}" method="POST">
+          {% csrf_token %}
+          <button id="checkout-button" type="submit" class="btn-pay">Pay $10</button>
+        </form>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    const stripe = Stripe("{{ stripe_public_key }}");
+
+    document.getElementById('checkout-button').addEventListener('click', function () {
+        fetch('/create-checkout-session/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+                stripe.redirectToCheckout({ sessionId: data.id });
+            })
+            .catch((error) => console.error('Error:', error));
+    });
+  </script>
+{% endblock content %}

@@ -4,8 +4,84 @@ from django.contrib import messages
 from django.utils.timezone import make_aware
 from datetime import datetime
 from datetime import timedelta
+import stripe
+from django.conf import settings
+from django.http import JsonResponse
 
 # Create your views here.
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+def create_checkout_session(request):
+    YOUR_DOMAIN = "https://the-listening-ear-9b83df5f497d.herokuapp.com/"
+
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "usd",
+                        "product_data": {
+                            "name": "Therapy Appointment",
+                        },
+                        "unit_amount": 1000,  # Amount in cents (1000 = $10)
+                    },
+                    "quantity": 1,
+                },
+            ],
+            mode="payment",
+            success_url=YOUR_DOMAIN + "/success/",
+            cancel_url=YOUR_DOMAIN + "/cancel/",
+        )
+        return JsonResponse({"id": checkout_session.id})
+    except Exception as e:
+        return JsonResponse({"error": str(e)})
+
+
+def checkout(request):
+    if request.method == "POST":
+        try:
+            # Create a Stripe Checkout Session
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=["card"],
+                line_items=[
+                    {
+                        "price_data": {
+                            "currency": "usd",
+                            "product_data": {
+                                "name": "Appointment Booking",
+                            },
+                            "unit_amount": 1000,  # $10.00 in cents
+                        },
+                        "quantity": 1,
+                    }
+                ],
+                mode="payment",
+                success_url="https://the-listening-ear-9b83df5f497d.herokuapp.com/success/",
+                cancel_url="https://the-listening-ear-9b83df5f497d.herokuapp.com/payment-cancel/",
+            )
+            # Redirect to the Stripe-hosted checkout page
+            return redirect(checkout_session.url, code=303)
+        except Exception as e:
+            # Render an error page or show error in checkout template
+            return render(request, "checkout.html", {"error": str(e)})
+
+    # Render the checkout form if GET request
+    return render(request, "checkout.html")
+
+
+def success(request):
+    return render(request, "success.html")
+
+
+def payment_cancel(request):
+    return render(
+        request,
+        "payment_cancel.html",
+        {"message": "Your payment was canceled. Please try again or contact support."},
+    )
 
 
 def book_appointment(request):

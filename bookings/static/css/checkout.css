@@ -1,0 +1,57 @@
+.checkout-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.appointment-summary {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.appointment-summary h3 {
+  font-size: 18px;
+  color: #555;
+}
+
+.appointment-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.appointment-summary li {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.payment-info p {
+  font-size: 16px;
+  color: #555;
+  margin: 15px 0;
+}
+
+.btn-pay {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-pay:hover {
+  background-color: #218838;
+}
